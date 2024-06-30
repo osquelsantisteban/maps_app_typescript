@@ -1,36 +1,75 @@
 import { defineStore } from 'pinia';
-import type { Place } from './state';
+import type { Place, PlacesState } from './state';
+// import type { state, Place, PlacesState } from './state';
 
 export const usePlacesStore = defineStore('places', {
-  state: () => ({
-    places: [] as Place[],
+  state: (): PlacesState => ({
+    userLocation: null,
+    isLoading: false,
+    places: [],
   }),
-  
+
   getters: {
-    isLoading: (state) => state.places.some(place => place.isLoading),
-    isUserLocationSet: (state) => state.places.some(place => place.userLocation !== undefined),
+    isUserLocationSet: (state): boolean => state.userLocation !== null,
+    getPlaces: (state): Place[] => state.places,
   },
 
   actions: {
+    setLngLat(lng: number, lat: number) {
+      this.userLocation = [lng, lat];
+    },
+
+    setLoading(val: boolean) {
+      this.isLoading = val;
+    },
+
+    setPlaces(places: Place[]) {
+      this.places = places;
+    },
     
-    setLoading(index: number, loading: boolean) {
-      if (this.places[index]) {
-        this.places[index].isLoading = loading;
+    getInitialLocation() {
+      
+      this.setLoading(true);
+      navigator.geolocation.getCurrentPosition(
+        ({ coords }) => {
+          this.setLngLat(coords.longitude, coords.latitude);
+          this.setLoading(false);
+        },
+        (err) => {
+          console.error(err);
+          this.setLoading(false);
+          throw new Error('No geolocation available');
+        }
+      );
+    },
+
+    async searchPlacesByTerm(term: string) {
+      this.setLoading(true);
+      try {
+        // Simulación de una llamada a la API
+        const places = await new Promise<Place[]>((resolve) => {
+          setTimeout(() => resolve([
+            { name: `${term} Place 1`, location: [40.7128, -74.0060] },
+            { name: `${term} Place 2`, location: [34.0522, -118.2437] }
+          ]), 1000);
+        });
+        this.setPlaces(places);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.setLoading(false);
       }
     },
 
-    setUserLocation(index: number, location: [number, number]) {
-      if (this.places[index]) {
-        this.places[index].userLocation = location;
-      }
-    },
-
-    addPlace(place: Place) {
-      this.places.push(place);
-    },
-
-    removePlace(index: number) {
-      this.places.splice(index, 1);
-    },
-  },
+  }
 });
+
+/* async fetchPlaces() {
+  this.setLoading(true);
+  // Simula una llamada a la API
+  const places = await new Promise<Place[]>((resolve) => {
+    setTimeout(() => resolve([{ name: 'Place 1' }, { name: 'Place 2' }]), 1000);
+  });
+  this.setPlaces(places);
+  this.setLoading(false);
+} */

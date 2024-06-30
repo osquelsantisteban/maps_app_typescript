@@ -1,12 +1,20 @@
 export interface Place {
-  isLoading: boolean;
-  userLocation?: [number, number]; // [lng, lat]
+  name: string;
+  location: [number, number];
 }
 
-/* export function state() {
-  return {
-    places: [] as Place[],
-  };
-} */
+export interface PlacesState {
+  userLocation: [number, number] | null;
+  isLoading: boolean;
+  places: Place[];
+}
 
-// export default state;
+export const state: PlacesState = {
+  userLocation: null,
+  isLoading: false,
+  places: [],
+};
+
+export interface StateInterface{
+  places: PlacesState,
+}

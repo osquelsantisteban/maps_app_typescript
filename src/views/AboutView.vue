@@ -1,15 +1,28 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div>
+    <ul>
+      <li v-for="(place, index) in places" :key="index">
+        <p v-if="place.isLoading">Loading...</p>
+        <p v-else-if="place.userLocation">Location: {{ place.userLocation }}</p>
+        <p v-else>User location not set</p>
+        <button @click="removePlaceHandle(index)">Remove Place</button>
+      </li>
+    </ul>
+    <button @click="addPlaceHandle">Add New Place</button>
   </div>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+<script setup lang="ts">
+import { usePlacesStoreComposable } from '@/composables/usePlacesStore';
+const places = <Array<any>>[]
+const placesStore = usePlacesStoreComposable();
+// const { places, addPlace, removePlace } = placesStore;
+
+function addPlaceHandle() {
+  // addPlace({ isLoading: false, userLocation: [51.5074, -0.1278] }); // Añadir una nueva ubicación estática
 }
-</style>
+
+function removePlaceHandle(index: number) {
+  // removePlace(index);
+}
+</script>
