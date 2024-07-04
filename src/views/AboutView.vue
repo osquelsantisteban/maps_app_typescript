@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { useGeolocation } from '@/composables/useGeolocation';
 const places = <Array<any>>[]
-const placesStore = usePlacesStoreComposable();
+const placesStore = useGeolocation();
 // const { places, addPlace, removePlace } = placesStore;
 
 function addPlaceHandle() {

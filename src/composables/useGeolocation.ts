@@ -1,22 +1,20 @@
-import { ref } from 'vue';
+import { computed } from 'vue';
+import { usePlacesStore } from '@/stores/places';
 
 export const useGeolocation = () => {
-  const userLocation = ref<[number, number] | null>(null);
-
-  const getInitialLocation = () => {
-    navigator.geolocation.getCurrentPosition(
-      ({ coords }) => {
-        userLocation.value = [coords.latitude, coords.longitude];
-      },
-      (err) => {
-        console.error(err);
-        throw new Error('No geolocation available');
-      }
-    );
-  };
+  const placesStore = usePlacesStore();
 
   return {
-    userLocation,
-    getInitialLocation,
+    // State
+    isLoading: computed(() => placesStore.isLoading),
+    userLocation: computed(() => placesStore.userLocation),
+    places: computed(() => placesStore.places),
+
+    // Getters
+    isUserLocationSet: computed(() => placesStore.isUserLocationSet),
+
+    // Actions
+    searchPlacesByTerm: (query: string = '') => placesStore.searchPlacesByTerm(query),
+    getInitialLocation: () => placesStore.getInitialLocation(),
   };
 };

@@ -1,7 +1,7 @@
 export interface Place {
   id: string;
   name: string;
-  location: [number, number];//[lng, lat]
+  location: [number, number];//[lat, lng]
 }
 
 export interface PlacesState {

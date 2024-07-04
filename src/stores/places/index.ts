@@ -14,8 +14,8 @@ export const usePlacesStore = defineStore('places', {
   },
 
   actions: {
-    setLngLat(lng: number, lat: number) {
-      this.userLocation = [lng, lat];
+    setLatLng(lat: number, lng: number) {
+      this.userLocation = [lat, lng];
     },
 
     setLoading(val: boolean) {
@@ -31,7 +31,7 @@ export const usePlacesStore = defineStore('places', {
       this.setLoading(true);      
       navigator.geolocation.getCurrentPosition(
         ({ coords }) => {
-          this.setLngLat(coords.longitude, coords.latitude);
+          this.setLatLng(coords.latitude, coords.longitude);
           this.setLoading(false);
         },
         (err) => {
@@ -59,16 +59,5 @@ export const usePlacesStore = defineStore('places', {
         this.setLoading(false);
       }
     },
-
   }
 });
-
-/* async fetchPlaces() {
-  this.setLoading(true);
-  // Simula una llamada a la API
-  const places = await new Promise<Place[]>((resolve) => {
-    setTimeout(() => resolve([{ name: 'Place 1' }, { name: 'Place 2' }]), 1000);
-  });
-  this.setPlaces(places);
-  this.setLoading(false);
-} */
