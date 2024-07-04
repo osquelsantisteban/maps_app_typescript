@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import type { Place, PlacesState } from './state';
-// import type { state, Place, PlacesState } from './state';
 
 export const usePlacesStore = defineStore('places', {
   state: (): PlacesState => ({
@@ -29,7 +28,7 @@ export const usePlacesStore = defineStore('places', {
     
     getInitialLocation() {
       
-      this.setLoading(true);
+      this.setLoading(true);      
       navigator.geolocation.getCurrentPosition(
         ({ coords }) => {
           this.setLngLat(coords.longitude, coords.latitude);

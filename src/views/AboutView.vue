@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { usePlacesStoreComposable } from '@/composables/usePlacesStore';
+import { useGeolocation } from '@/composables/useGeolocation';
 const places = <Array<any>>[]
 const placesStore = usePlacesStoreComposable();
 // const { places, addPlace, removePlace } = placesStore;

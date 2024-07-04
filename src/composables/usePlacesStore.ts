@@ -1,7 +1,7 @@
 import { computed, onMounted } from 'vue';
 import { usePlacesStore } from '@/stores/places';
 
-export const usePlacesStoreComposable = () => {
+export const useGeolocation = () => {
   const placesStore = usePlacesStore();
 
   onMounted(() => {

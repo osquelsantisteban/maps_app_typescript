@@ -1,32 +1,39 @@
 <template>
 
-    <div 
-        class="loading-map"
-        v-if="!userLocation"
-    >
-        <div class="text-center">
-            <h3>Espere por favor</h3>
-            <span>localizando...</span>
-        </div>
+    <div class="loading-map" v-if="!userLocation">
+      <div class="text-center">
+        <h3>Espere por favor</h3>
+        <span>localizando...</span>
+      </div>
     </div>
-
-    <div v-show="userLocation" class="map-container" ref="mapElement"/>
-
-  </template>
   
-<script lang="ts" setup>
-import { ref,onMounted } from 'vue';
-import { usePlacesStoreComposable } from '@/composables/usePlacesStore';
+    <div v-show="userLocation" class="map-container" ref="mapElement" id="map"></div>
 
-const mapElement = ref<HTMLDivElement>();
-const { isLoading,userLocation } = usePlacesStoreComposable();
+</template>
+
+<script lang="ts" setup>
+import { ref, onMounted, watch } from 'vue';
+import { useGeolocation } from '@/composables/useGeolocation';
+import { useMapLeaflet } from '@/composables/useMapLeaflet';
+import 'leaflet/dist/leaflet.css';
+
+const mapElement = ref<HTMLDivElement | null>(null);
+const { userLocation, getInitialLocation } = useGeolocation();
+const { renderMap } = useMapLeaflet(mapElement);
+
 
 onMounted(() => {
-console.log(mapElement.value);
-
+  getInitialLocation();
 });
+
+watch(userLocation, (location) => {
+  if (location && location.length === 2) {
+    renderMap([location[0], location[1]]);
+  }
+});
+
 </script>
-  
+
 <style scoped>
 
 .loading-map{
@@ -47,6 +54,8 @@ console.log(mapElement.value);
     position: fixed;
     width: 100vw;
     height: 100vh;
+    margin: 0px;
+    padding: 0px;
     background-color: red;
     top: 0;
     left: 0;
