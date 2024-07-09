@@ -19,8 +19,8 @@ const handleMoveMyLocation = () => {
 <style scoped>
 button{
     position: fixed;
-    top: 90px;
-    left: 5px;
+    top: 30px;
+    right: 30px;
     background-color: rgba(10,82,197,0.8);
     color: white;
     padding: 0.5rem 0.75rem;
