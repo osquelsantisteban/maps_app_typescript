@@ -13,8 +13,7 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, watch } from 'vue';
-import { useGeolocation } from '@/composables/useGeolocation';
-import { useMapLeaflet } from '@/composables/useMapLeaflet';
+import { useGeolocation, useMapLeaflet } from '@/composables';
 import 'leaflet/dist/leaflet.css';
 
 const mapElement = ref<HTMLDivElement | null>(null);
@@ -27,7 +26,7 @@ onMounted(() => {
 });
 
 watch(userLocation, (location) => {
-  if (location && location.length === 2) {
+  if (location && location.length === 2) {    
     renderMap([location[0], location[1]]);
   }
 });
