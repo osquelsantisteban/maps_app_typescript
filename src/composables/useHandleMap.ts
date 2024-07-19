@@ -14,10 +14,21 @@ export const useHandleMap = () => {
             duration: 1.5,
         });
     }
-}
+  }
+
+  const moveToLocation = (location) => {
+    console.log(location);
+    if (mapStore.map && location) {
+        mapStore.map.flyTo(location, 13, {
+            animate: true,
+            duration: 1.5,
+        });
+    }
+  }
 
 
   return {
-    moveMyLocation
+    moveMyLocation,
+    moveToLocation
   };
 };

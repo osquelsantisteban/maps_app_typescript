@@ -7,6 +7,7 @@ export const useGeolocation = () => {
   return {
     // State
     isLoading: computed(() => placesStore.isLoading),
+    isLoadingPlaces: computed(() => placesStore.isLoadingPlaces),
     userLocation: computed(() => placesStore.userLocation),
     places: computed(() => placesStore.places),
 

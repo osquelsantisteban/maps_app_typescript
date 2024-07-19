@@ -29,10 +29,28 @@ button{
     -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 15px;
     -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 15px;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 15px;
+    cursor: pointer;
+}
+
+
+@keyframes buttonHover {
+  0%   {    transform: scale(1);  }
+  5%   {    transform: scale(0.9);  }
+  25%   {    transform: scale(1.05);  }
+  100%   {    transform: scale(1.2);  }
+  
+}
+
+button:hover{
+    animation-name: buttonHover;
+    animation-duration: 0.5s;
+    transform: scale(1.2);
 }
 
 img{
     width: 1.5rem;
     height: 1.75rem;
 }
+
+
 </style>

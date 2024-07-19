@@ -7,12 +7,14 @@ export interface Place {
 export interface PlacesState {
   userLocation: [number, number] | null;
   isLoading: boolean;
+  isLoadingPlaces: boolean;
   places: Place[];
 }
 
 export const state: PlacesState = {
   userLocation: null,
   isLoading: false,
+  isLoadingPlaces: false,
   places: [],
 };
 

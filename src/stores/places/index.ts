@@ -1,10 +1,13 @@
 import { defineStore } from 'pinia';
 import type { Place, PlacesState } from './state';
+import { searchApi } from '@/apis';
+import type { Feature,PlacesResponse } from '@/interfaces/places';
 
 export const usePlacesStore = defineStore('places', {
   state: (): PlacesState => ({
     userLocation: null,
     isLoading: false,
+    isLoadingPlaces: false,
     places: [],
   }),
 
@@ -20,6 +23,10 @@ export const usePlacesStore = defineStore('places', {
 
     setLoading(val: boolean) {
       this.isLoading = val;
+    },
+
+    setIsLoadingPlaces(val: boolean) {
+      this.isLoadingPlaces = val;
     },
 
     setPlaces(places: Place[]) {
@@ -42,22 +49,34 @@ export const usePlacesStore = defineStore('places', {
       );
     },
 
-    async searchPlacesByTerm(term: string) {
-      this.setLoading(true);
+    async searchPlacesByTerm(term: string):Promise<Feature> {
+
+      if(term.length === 0) return [];
+
+      if(!this.userLocation) throw new Error('No hay ubicación del usuario');
+
+      this.isLoadingPlaces = true;
+
       try {
-        // Simulación de una llamada a la API
-        const places = await new Promise<Place[]>((resolve) => {
-          setTimeout(() => resolve([
-            { name: `${term} Place 1`, location: [40.7128, -74.0060] },
-            { name: `${term} Place 2`, location: [34.0522, -118.2437] }
-          ]), 1000);
+
+        const resp = await searchApi.get<PlacesResponse>('', {
+            params: {
+              q: term,
+              viewbox: `${this.userLocation[1] - 0.05},${this.userLocation[0] + 0.05},${this.userLocation[1] + 0.05},${this.userLocation[0] - 0.05}`,
+              bounded: 1,
+            }
         });
-        this.setPlaces(places);
+
+        this.setPlaces(resp.data);
+        return resp.data;
+
       } catch (error) {
         console.error(error);
       } finally {
-        this.setLoading(false);
+        this.isLoadingPlaces = false;
+        
       }
     },
+    
   }
 });
