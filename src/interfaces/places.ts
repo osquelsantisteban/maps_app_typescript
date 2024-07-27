@@ -17,19 +17,20 @@ export interface PlacesResponse {
 }
 
 export interface Feature {
-    id:            string;
-    type:          string;
-    place_type:    string[];
-    relevance:     number;
-    properties:    Properties;
-    text_es:       string;
-    place_name_es: string;
-    text:          string;
-    place_name:    string;
-    bbox?:         number[];
-    center:        number[];
-    geometry:      Geometry;
-    context:       Context[];
+    place_id:     number;
+    licence:      string;
+    osm_type:     string;
+    osm_id:       number;
+    lat:          string;
+    lon:          string;
+    class:        string;
+    type:         string;
+    place_rank:   number;
+    importance:   number;
+    addresstype:  string;
+    name:         string;
+    display_name: string;
+    boundingbox:  string[];
 }
 
 export interface Context {

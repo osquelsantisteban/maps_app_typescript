@@ -29,19 +29,22 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref,watch } from 'vue';
 import { useHandleMap,useGeolocation } from '@/composables';
-import ItemResult from './ItemResult.vue';
-import type { Feature } from '@/interfaces/places';
+import type { PlacesResponse } from '@/interfaces/places';
 
 const { isLoadingPlaces,places } = useGeolocation();
-const activePlace = ref('');
+const activePlace = ref();
 const { moveToLocation } = useHandleMap();
 
-const onPlaceClicked = (place: Feature) => {
+const onPlaceClicked = (place: PlacesResponse) => {
   activePlace.value = place.osm_id
   moveToLocation([place.lat,place.lon])
 }
+
+watch(places,(newPlaces) => {
+  
+});
 
 </script>
 

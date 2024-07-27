@@ -49,7 +49,7 @@ export const usePlacesStore = defineStore('places', {
       );
     },
 
-    async searchPlacesByTerm(term: string):Promise<Feature> {
+    async searchPlacesByTerm(term: string) {
 
       if(term.length === 0) return [];
 
@@ -62,8 +62,8 @@ export const usePlacesStore = defineStore('places', {
         const resp = await searchApi.get<PlacesResponse>('', {
             params: {
               q: term,
-              viewbox: `${this.userLocation[1] - 0.05},${this.userLocation[0] + 0.05},${this.userLocation[1] + 0.05},${this.userLocation[0] - 0.05}`,
-              bounded: 1,
+              // viewbox: `${this.userLocation[1] - 0.1},${this.userLocation[0] + 0.1},${this.userLocation[1] + 0.1},${this.userLocation[0] - 0.1}`,
+              // bounded: 1,
             }
         });
 
