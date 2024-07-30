@@ -1,14 +1,16 @@
-export interface Place {
-  id: string;
+/* export interface Place {
+  // id: string;
+  osm_id: string;
   name: string;
   location: [number, number];//[lat, lng]
-}
+} */
+import type { PlacesResponse } from '@/interfaces/places';
 
 export interface PlacesState {
   userLocation: [number, number] | null;
   isLoading: boolean;
   isLoadingPlaces: boolean;
-  places: Place[];
+  places: PlacesResponse[];
 }
 
 export const state: PlacesState = {
