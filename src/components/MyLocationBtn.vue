@@ -19,8 +19,9 @@ const handleMoveMyLocation = () => {
 <style scoped>
 button{
     position: fixed;
-    top: 30px;
-    right: 30px;
+    top: 80px;
+    /* right: 30px; */
+    left: 3px;
     background-color: rgba(10,82,197,0.8);
     color: white;
     padding: 0.5rem 0.75rem;
@@ -52,5 +53,21 @@ img{
     height: 1.75rem;
 }
 
-
+@media screen and (min-width: 800px) {
+    button{
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        left: auto;
+        background-color: rgba(10,82,197,0.8);
+        color: white;
+        padding: 0.5rem 0.75rem;
+        border-radius: 50%;
+        border: 0px;
+        -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 15px;
+        -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 15px;
+        box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 15px;
+        cursor: pointer;
+    }
+}
 </style>

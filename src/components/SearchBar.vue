@@ -35,21 +35,34 @@ const searchTerm = computed({
 
 <style scoped>
 .searchbar-container{
-    position: fixed;
-    top: 10px;
-    left: 50px;
-    background-color: white;
-    z-index: 999;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);    
-    overflow: hidden;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 5px;
-    gap: 0.25rem;
-    min-width: 200px;
+  position: fixed;
+  top: 10px;
+  left: 60px;
+  background-color: white;
+  z-index: 999;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);    
+  overflow: hidden;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px;
+  width: 280px; 
+  gap: 0.25rem;
+  @media(min-width: 800px){
+    width: 500px;
+  }
+}
+
+input{
+  padding: 10px 15px;    
+  border-radius: 5px;
+  position: relative;
+  width: 250px;
+  @media(min-width: 800px){
+    width: 460px;
+  }
 }
 
 img{
@@ -60,14 +73,4 @@ img{
     right: 5px;
     z-index: 999;
 }
-
-input{
-    padding: 10px 15px;
-    border-radius: 5px;
-    position: relative;
-    min-width: 200px;
-}
-
-
-
 </style>

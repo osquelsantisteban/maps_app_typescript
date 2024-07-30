@@ -4,7 +4,7 @@
     <h6>Cargando...</h6>
   </div>
 
-  <ul v-else-if="places.length > 0" class="custom-list-group mt-3">
+  <ul v-else-if="places.length > 0" class="custom-list-group">
     
     
     <li
@@ -29,6 +29,7 @@
 </template>
 
 <script lang="ts" setup>
+
 import { ref,watch } from 'vue';
 import { useHandleMap,useGeolocation } from '@/composables';
 import type { PlacesResponse } from '@/interfaces/places';
@@ -67,8 +68,14 @@ ul, li {
 
 .custom-list-group {
   display: block;
-  margin-top: 1rem;
-  overflow-y: auto;
+  margin-top: 0.5rem;
+  overflow-y: scroll;
+  width: 280px;
+  min-height: 50dvh;
+  max-height: 75dvh;
+  @media (min-width: 800px) {
+    width: 500px;
+  }
 }
 
 .custom-list-group-item {
@@ -78,7 +85,6 @@ ul, li {
   background-color: #fff;
   border: 1px solid #dee2e6;
   text-decoration: none;
-  width: 200px;
 }
 
 .custom-list-group-item:last-child {
@@ -194,5 +200,25 @@ p{
   line-height: 1.5;
   border-radius: 0.2rem;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #dae0e5;
+  border-radius: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: gray;
+  border: solid 7px #939ca4;
+  border-radius: 15px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: gray;
+}
+
 
 </style>
