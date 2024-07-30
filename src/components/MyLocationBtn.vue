@@ -21,10 +21,10 @@ button{
     position: fixed;
     top: 80px;
     /* right: 30px; */
-    left: 3px;
+    left: 6px;
     background-color: rgba(10,82,197,0.8);
     color: white;
-    padding: 0.5rem 0.75rem;
+    padding: 0.25rem 0.5rem;
     border-radius: 50%;
     border: 0px;
     -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 15px;
