@@ -1,7 +1,7 @@
 import { computed } from 'vue';
 import { usePlacesStore } from '@/stores/places';
 
-export const useGeolocation = () => {
+export const usePlacesStoreComposable = () => {
   const placesStore = usePlacesStore();
 
   return {
@@ -13,8 +13,9 @@ export const useGeolocation = () => {
 
     // Getters
     isUserLocationSet: computed(() => placesStore.isUserLocationSet),
-
+    
     // Actions
+    setIsLoadingPlaces: (value: boolean) => placesStore.setIsLoadingPlaces(value),
     searchPlacesByTerm: (query: string = '') => placesStore.searchPlacesByTerm(query),
     getInitialLocation: () => placesStore.getInitialLocation(),
   };

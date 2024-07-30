@@ -13,9 +13,9 @@
 </template>
 
 <script setup lang="ts">
-import { useGeolocation } from '@/composables/useGeolocation';
+import { usePlacesStoreComposable } from '@/composables/usePlacesStoreComposable';
 const places = <Array<any>>[]
-const placesStore = useGeolocation();
+const placesStore = usePlacesStoreComposable();
 // const { places, addPlace, removePlace } = placesStore;
 
 function addPlaceHandle() {

@@ -70,3 +70,21 @@ export interface Properties {
     maki?:       string;
     address?:    string;
 }
+
+export interface PlacesState {
+    userLocation: [number, number] | null;
+    isLoading: boolean;
+    isLoadingPlaces: boolean;
+    places: PlacesResponse[];
+}
+  
+export interface StateInterface{
+    places: PlacesState,
+}
+
+export const placesState: PlacesState = {
+    userLocation: null,
+    isLoading: false,
+    isLoadingPlaces: false,
+    places: [],
+}

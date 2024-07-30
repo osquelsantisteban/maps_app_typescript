@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia';
-import type { Place, PlacesState } from './state';
+
+// import type { Place, PlacesState } from '@/interfaces/places';
+
 import { searchApi } from '@/apis';
-import type { Feature,PlacesResponse } from '@/interfaces/places';
+import type { PlacesState,PlacesResponse } from '@/interfaces/places';
 
 export const usePlacesStore = defineStore('places', {
   state: (): PlacesState => ({
@@ -13,12 +15,15 @@ export const usePlacesStore = defineStore('places', {
 
   getters: {
     isUserLocationSet: (state): boolean => state.userLocation !== null,
-    getPlaces: (state): Place[] => state.places,
+    getPlaces: (state): PlacesResponse[] => state.places,
   },
 
   actions: {
     setLatLng(lat: number, lng: number) {
       this.userLocation = [lat, lng];
+    },
+    setUserLocation(location: [number, number]) {
+      this.userLocation = location;
     },
 
     setLoading(val: boolean) {
@@ -29,7 +34,7 @@ export const usePlacesStore = defineStore('places', {
       this.isLoadingPlaces = val;
     },
 
-    setPlaces(places: Place[]) {
+    setPlaces(places: PlacesResponse[]) {
       this.places = places;
     },
     

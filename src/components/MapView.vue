@@ -13,11 +13,11 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, watch } from 'vue';
-import { useGeolocation, useMapLeaflet } from '@/composables';
+import { usePlacesStoreComposable, useMapLeaflet } from '@/composables';
 import 'leaflet/dist/leaflet.css';
 
 const mapElement = ref<HTMLDivElement | null>(null);
-const { userLocation, getInitialLocation } = useGeolocation();
+const { userLocation, getInitialLocation } = usePlacesStoreComposable();
 const { renderMap } = useMapLeaflet(mapElement);
 
 

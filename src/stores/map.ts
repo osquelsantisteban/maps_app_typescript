@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import * as L from 'leaflet';
-import { state, type MapState } from './state';
+import { state, type MapState } from '@/interfaces/maps';
 
 export const useMapStore = defineStore('map', {
 
@@ -46,9 +46,6 @@ export const useMapStore = defineStore('map', {
       if (!this.map) throw new Error('Map is not initialized');
 
       this.setLoadingRoute(true);
-
-      // Aquí deberías reemplazar por la lógica para obtener la ruta entre puntos usando una API que funcione con Leaflet.
-      // Por ejemplo, podrías usar la API de OpenRouteService en lugar de Mapbox.
 
       try {
         const response = await fetch(`https://api.openrouteservice.org/v2/directions/driving-car?api_key=YOUR_API_KEY&start=${start.join(',')}&end=${end.join(',')}`);

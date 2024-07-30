@@ -31,10 +31,10 @@
 <script lang="ts" setup>
 
 import { ref,watch } from 'vue';
-import { useHandleMap,useGeolocation } from '@/composables';
+import { useHandleMap,usePlacesStoreComposable } from '@/composables';
 import type { PlacesResponse } from '@/interfaces/places';
 
-const { isLoadingPlaces,places } = useGeolocation();
+const { isLoadingPlaces,places } = usePlacesStoreComposable();
 const activePlace = ref();
 const { moveToLocation } = useHandleMap();
 
@@ -71,7 +71,7 @@ ul, li {
   margin-top: 0.5rem;
   overflow-y: scroll;
   width: 280px;
-  min-height: 50dvh;
+  /* min-height: 50dvh; */
   max-height: 75dvh;
   @media (min-width: 800px) {
     width: 500px;

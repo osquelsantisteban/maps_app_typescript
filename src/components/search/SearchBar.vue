@@ -1,26 +1,26 @@
 <template>
-    <div class="searchbar-container" v-if="userLocation">
+    <section class="searchbar-container" v-if="userLocation">
         
         <input type="text" placeholder="Buscar lugares..." v-model="searchTerm"/>
         
         <SearchResults />
 
-    </div>
+    </section>
 </template>
 
 <script lang="ts" setup>
 import { ref,computed } from 'vue';
-import { useGeolocation } from '@/composables';
-import SearchResults from '@/components/search-results/SearchResults.vue';
+import { usePlacesStoreComposable } from '@/composables';
+import SearchResults from '@/components/search/SearchResults.vue';
 
-let { userLocation,isLoadingPlaces,searchPlacesByTerm } = useGeolocation();
+let { userLocation,setIsLoadingPlaces,searchPlacesByTerm } = usePlacesStoreComposable();
 const debouncedTimeout = ref();
 const debouncedValue = ref('');
 
 const searchTerm = computed({
   get(){ return debouncedValue.value; },
   set(val: string){
-    isLoadingPlaces = true;
+    setIsLoadingPlaces(true);
     if(debouncedTimeout.value) clearTimeout(debouncedTimeout.value);
 
     debouncedTimeout.value = setTimeout(() => {

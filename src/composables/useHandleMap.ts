@@ -1,11 +1,11 @@
 import { useMapStore } from '@/stores/map';
-import { useGeolocation } from '@/composables';
+import { usePlacesStoreComposable } from '@/composables';
 
 
 export const useHandleMap = () => {
 
   const mapStore = useMapStore();
-  const { userLocation } = useGeolocation();
+  const { userLocation } = usePlacesStoreComposable();
 
   const moveMyLocation = () => {
     if (mapStore.map && userLocation.value) {
@@ -17,7 +17,7 @@ export const useHandleMap = () => {
   }
 
   const moveToLocation = (location) => {
-    console.log(location);
+    
     if (mapStore.map && location) {
         mapStore.map.flyTo(location, 13, {
             animate: true,

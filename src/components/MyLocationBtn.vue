@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts" setup>
-import { useHandleMap,useGeolocation } from '@/composables';
+import { useHandleMap,usePlacesStoreComposable } from '@/composables';
 
 const { moveMyLocation, } = useHandleMap();
-const { userLocation } = useGeolocation();
+const { userLocation } = usePlacesStoreComposable();
 
 const handleMoveMyLocation = () => {
     moveMyLocation();

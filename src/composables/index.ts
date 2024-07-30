@@ -1,3 +1,3 @@
 export { useMapLeaflet } from "./useMapLeaflet";
-export { useGeolocation } from "./useGeolocation";
+export { usePlacesStoreComposable } from "./usePlacesStoreComposable";
 export { useHandleMap } from  "./useHandleMap";
